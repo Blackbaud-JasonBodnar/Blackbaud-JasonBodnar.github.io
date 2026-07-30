@@ -32,6 +32,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
            console.log("Page loaded. Waiting 3 seconds for GTM ...");
 
            setTimeout(function() {
+             if (typeof gtag !== 'undefined') {
+               gtag('get', 'G-6PQ0PRXHSB', 'page_location', (url) => console.log('URL: ' + url));
+             }
              var appDiv = document.getElementById('app');
              var formDiv = document.createElement('div');
              formDiv.setAttribute('data-blackbaud-standard-form-id', 'e5884edf-b672-42be-aa83-7c4f0457741d');
