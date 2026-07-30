@@ -35,6 +35,44 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
              if (typeof gtag !== 'undefined') {
                gtag('get', 'G-6PQ0PRXHSB', 'page_location', (url) => console.log('URL: ' + url));
              }
+               var targetUrl = 'https://your-3rdparty-domain.com';
+
+  // 2. Helper function to read a specific browser cookie value
+  function getCookie(name) {
+    var value = "; " + document.cookie;
+    var parts = value.split("; " + name + "=");
+    if (parts.length === 2) return parts.pop().split(";").shift();
+    return null;
+  }
+
+  // 3. Extract the active GA4 Client ID and Session ID strings
+  var gaCookie = getCookie('_ga'); // Format usually: GA1.1.XXXXXXXXXX.YYYYYYYYYY
+  var sessionCookie = getCookie('_ga_6PQ0PRXHSB'); // Matches your specific GA4 ID
+
+  var clientId = '';
+  var sessionId = '';
+
+  if (gaCookie) {
+    // Extract the raw numeric Client ID block (e.g., XXXXXXXXXX.YYYYYYYYYY)
+    var gaParts = gaCookie.split('.');
+    if (gaParts.length >= 2) {
+      clientId = gaParts[gaParts.length - 2] + '.' + gaParts[gaParts.length - 1];
+    }
+  }
+
+  if (sessionCookie) {
+    // Extract the active Session ID block from the compound GA4 session string
+    var sessionParts = sessionCookie.split('.');
+    if (sessionParts.length >= 2) {
+      sessionId = sessionParts[2]; // Grabs the unique numeric epoch timestamp
+    }
+  }
+
+  // 4. If tracking cookies exist, append them as plain query parameters
+  if (clientId) targetUrl += (targetUrl.includes('?') ? '&' : '?') + 'parent_cid=' + encodeURIComponent(clientId);
+  if (sessionId) targetUrl += '&parent_sid=' + encodeURIComponent(sessionId);
+console.log('Target URL: ' + targetUrl;
+             
              var appDiv = document.getElementById('app');
              var formDiv = document.createElement('div');
              formDiv.setAttribute('data-blackbaud-standard-form-id', 'e5884edf-b672-42be-aa83-7c4f0457741d');
