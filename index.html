@@ -71,7 +71,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   // 4. If tracking cookies exist, append them as plain query parameters
   if (clientId) targetUrl += (targetUrl.includes('?') ? '&' : '?') + 'parent_cid=' + encodeURIComponent(clientId);
   if (sessionId) targetUrl += '&parent_sid=' + encodeURIComponent(sessionId);
-console.log('Target URL: ' + targetUrl;
+  console.log('Target URL: ' + targetUrl);
              
              var appDiv = document.getElementById('app');
              var formDiv = document.createElement('div');
