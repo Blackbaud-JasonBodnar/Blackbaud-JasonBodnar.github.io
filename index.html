@@ -21,8 +21,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <h1>Basic Website</h1>
       <p>This site is ready for custom JavaScript.</p>
       <div id="app">
-        <script src="https://sky.blackbaudcdn.net/static/og-web-loader/1/main.js" data-envid="t-Z-FEhKwLvkGVGjTCcbBMEA" data-zone="usa"></script>
-        <div data-blackbaud-standard-form-id="e5884edf-b672-42be-aa83-7c4f0457741d" data-svc-id="renxt"></div>
+      <script>
+         window.addEventListener('load', function() {
+           console.log("Page loaded. Waiting 3 seconds for GTM ...");
+
+           setTimeout(function(), {
+             var appDiv = document.getElementById('app');
+             var formDiv = document.createElement('div');
+             formDiv.setAttribute('data-blackbaud-standard-form-id', 'e5884edf-b672-42be-aa83-7c4f0457741d');
+             formDiv.setAttribute('data-svc-id', 'renxt');
+             appDiv.appendChild(formDiv);
+             var script = document.createElement('script');
+             script.setAttribute('src', 'https://sky.blackbaudcdn.net/static/og-web-loader/1/main.js');
+             script.setAttribute('data-envid', 't-Z-FEhKwLvkGVGjTCcbBMEA');
+             script.setAttribute('data-zone', 'usa');
+             appDiv.appendChild(script);
+             console.log('Iframe injected! Check Chrome Elements tab now.");
+           }, 3000);
+         });
+      </script>  
       </div>
     </main>
   </body>
